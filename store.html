@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire — Do'kon & Olmoslar</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. STYLES RESET & VARIABLES
+           ========================================================================== */
+        :root {
+            --primary-color: #ff9d00;
+            --primary-glow: rgba(255, 157, 0, 0.4);
+            --secondary-color: #ff0055;
+            --bg-dark: #0a0b10;
+            --bg-card: rgba(18, 22, 36, 0.85);
+            --bg-card-hover: rgba(28, 35, 56, 0.95);
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+            --border-color: rgba(255, 157, 0, 0.25);
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 80% 20%, rgba(255, 0, 85, 0.06) 0%, transparent 40%);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 11, 16, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 24px; font-weight: 900;
+            color: var(--primary-color);
+            text-transform: uppercase; letter-spacing: 2px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-menu { display: flex; gap: 30px; align-items: center; }
+        .nav-link {
+            font-family: var(--font-heading); font-size: 14px; font-weight: 700;
+            text-transform: uppercase; color: var(--text-main); transition: var(--transition);
+        }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color); }
+        .hamburger { display: none; font-size: 24px; cursor: pointer; }
+
+        /* ==========================================================================
+           3. PAGE BANNER
+           ========================================================================== */
+        .page-banner {
+            padding: 140px 8% 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(10,11,16,0.6), var(--bg-dark));
+        }
+        .page-banner h1 {
+            font-family: var(--font-heading);
+            font-size: 42px; font-weight: 900;
+            text-transform: uppercase; margin-bottom: 10px;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-glow);
+        }
+        .page-banner p { color: var(--text-muted); font-size: 15px; max-width: 600px; margin: 0 auto; }
+
+        /* ==========================================================================
+           4. STORE LAYOUT & PRODUCTS GRID
+           ========================================================================== */
+        .store-container {
+            padding: 20px 8% 80px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .store-container { grid-template-columns: 1fr; }
+        }
+
+        .section-sub-title {
+            font-family: var(--font-heading);
+            font-size: 22px; font-weight: 700;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            display: flex; align-items: center; gap: 10px;
+            color: var(--text-main);
+        }
+        .section-sub-title i { color: var(--primary-color); }
+
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .diamond-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diamond-card:hover, .diamond-card.selected {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 25px rgba(255, 157, 0, 0.2);
+        }
+
+        .diamond-card.selected::after {
+            content: '\f00c';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 10px; right: 10px;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+
+        .diamond-icon {
+            font-size: 40px;
+            color: #00d2ff;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4));
+        }
+
+        .diamond-amount {
+            font-family: var(--font-heading);
+            font-size: 20px; font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .diamond-bonus {
+            font-size: 12px;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .diamond-price {
+            font-family: var(--font-heading);
+            font-size: 16px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* ==========================================================================
+           5. CHECKOUT PANEL
+           ========================================================================== */
+        .checkout-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 12px; font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .pay-method {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .pay-method.active, .pay-method:hover {
+            border-color: var(--primary-color);
+            background: rgba(255, 157, 0, 0.1);
+            color: var(--primary-color);
+        }
+
+        .order-summary {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .summary-row:last-child {
+            margin-bottom: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 8px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .btn-buy {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), #ff5500);
+            color: #000;
+            font-family: var(--font-heading);
+            font-size: 15px; font-weight: 900;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--primary-glow);
+        }
+
+        /* ==========================================================================
+           6. FOOTER
+           ========================================================================== */
+        footer {
+            background: #050608;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                position: fixed; top: 70px; right: -100%;
+                width: 250px; height: calc(100vh - 70px);
+                background: rgba(10, 11, 16, 0.98);
+                flex-direction: column; padding: 40px 20px; transition: 0.4s;
+            }
+            .nav-menu.active { right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-fire-flame-curved"></i> Free Fire
+        </a>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="index.html" class="nav-link">Bosh Sahifa</a></li>
+            <li><a href="characters.html" class="nav-link">Qahramonlar</a></li>
+            <li><a href="store.html" class="nav-link active">Do'kon</a></li>
+            <li><a href="tournaments.html" class="nav-link">Turnirlar</a></li>
+            <li><a href="about.html" class="nav-link">Biz Haqimizda</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+    </header>
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+        <h1>Olmoslar Do'koni</h1>
+        <p>Hisobingizni to'ldiring, eksklyuziv sovg'alar va Elite Pass paketlarini eng qulay narxlarda xarid qiling.</p>
+    </section>
+
+    <!-- STORE CONTENT CONTAINER -->
+    <div class="store-container">
+        <!-- Products Column -->
+        <div>
+            <h2 class="section-sub-title"><i class="fa-solid fa-gem"></i> Olmos Paketlarini Tanlang</h2>
+            <div class="diamond-grid" id="diamondGrid">
+                <!-- JavaScript orqali to'ldiriladi -->
+            </div>
+        </div>
+
+        <!-- Checkout Panel Column -->
+        <div class="checkout-panel">
+            <h2 class="section-sub-title" style="font-size: 18px; margin-bottom: 15px;"><i class="fa-solid fa-cart-shopping"></i> Buyurtma Berish</h2>
+            
+            <div class="form-group">
+                <label class="form-label">Free Fire ID raqamingiz</label>
+                <input type="text" id="playerId" class="form-input" placeholder="Masalan: 1234567890">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">To'lov Turi</label>
+                <div class="payment-methods">
+                    <div class="pay-method active" onclick="selectPayment(this, 'Uzcard/Humo')">Uzcard / Humo</div>
+                    <div class="pay-method" onclick="selectPayment(this, 'Click / Payme')">Click / Payme</div>
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <div class="summary-row">
+                    <span>Tanlangan Paket:</span>
+                    <strong id="summaryItem">100 Olmos</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Bonus:</span>
+                    <strong id="summaryBonus" style="color:var(--secondary-color)">+10 Olmos</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Jami Narx:</span>
+                    <strong id="summaryPrice">10,000 UZS</strong>
+                </div>
+            </div>
+
+            <button class="btn-buy" onclick="completePurchase()">Xaridni Tasdiqlash</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Free Fire Fan Portal. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Olmos paketlari ma'lumotlar bazasi
+        const diamondPackages = [
+            { id: 1, amount: 100, bonus: 10, price: "10,000 UZS", rawPrice: 10000 },
+            { id: 2, amount: 310, bonus: 31, price: "30,000 UZS", rawPrice: 30000 },
+            { id: 3, amount: 520, bonus: 55, price: "50,000 UZS", rawPrice: 50000 },
+            { id: 4, amount: 1060, bonus: 120, price: "100,000 UZS", rawPrice: 100000 },
+            { id: 5, amount: 2180, bonus: 280, price: "200,000 UZS", rawPrice: 200000 },
+            { id: 6, amount: 5600, bonus: 800, price: "500,000 UZS", rawPrice: 500000 }
+        ];
+
+        let selectedPackage = diamondPackages[0];
+        let selectedPaymentMethod = "Uzcard/Humo";
+
+        const diamondGrid = document.getElementById('diamondGrid');
+
+        function renderPackages() {
+            diamondGrid.innerHTML = '';
+            diamondPackages.forEach((pkg, index) => {
+                const card = document.createElement('div');
+                card.className = `diamond-card ${pkg.id === selectedPackage.id ? 'selected' : ''}`;
+                card.onclick = () => selectPackage(pkg);
+                card.innerHTML = `
+                    <div class="diamond-icon"><i class="fa-solid fa-gem"></i></div>
+                    <div class="diamond-amount">${pkg.amount} Olmos</div>
+                    <div class="diamond-bonus">+${pkg.bonus} Bonus</div>
+                    <div class="diamond-price">${pkg.price}</div>
+                `;
+                diamondGrid.appendChild(card);
+            });
+        }
+
+        function selectPackage(pkg) {
+            selectedPackage = pkg;
+            document.querySelectorAll('.diamond-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            // Summary ni yangilash
+            document.getElementById('summaryItem').innerText = `${pkg.amount} Olmos`;
+            document.getElementById('summaryBonus').innerText = `+${pkg.bonus} Olmos`;
+            document.getElementById('summaryPrice').innerText = pkg.price;
+        }
+
+        function selectPayment(element, method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function completePurchase() {
+            const playerId = document.getElementById('playerId').value.trim();
+            if (!playerId) {
+                alert("Iltimos, Free Fire ID raqamingizni kiriting!");
+                return;
+            }
+            if (playerId.length < 5) {
+                alert("Noto'g'ri ID raqam kiritildi!");
+                return;
+            }
+
+            alert(`Tabriklayman! ID: ${playerId} uchun ${selectedPackage.amount} + ${selectedPackage.bonus} olmos muvaffaqiyatli sotib olindi (${selectedPaymentMethod} orqali). O'yiningizga marhamat!`);
+            document.getElementById('playerId').value = '';
+        }
+
+        // Mobile Nav
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+
+        // Boshlang'ich render
+        renderPackages();
+    </script>
+</body>
+</html>   
+</body>
+</html>

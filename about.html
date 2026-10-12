@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire — Biz Haqimizda & Aloqa</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. STYLES RESET & VARIABLES
+           ========================================================================== */
+        :root {
+            --primary-color: #ff9d00;
+            --primary-glow: rgba(255, 157, 0, 0.4);
+            --secondary-color: #ff0055;
+            --bg-dark: #0a0b10;
+            --bg-card: rgba(18, 22, 36, 0.85);
+            --bg-card-hover: rgba(28, 35, 56, 0.95);
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+            --border-color: rgba(255, 157, 0, 0.25);
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, rgba(255, 0, 85, 0.05) 0%, transparent 50%);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 11, 16, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 24px; font-weight: 900;
+            color: var(--primary-color);
+            text-transform: uppercase; letter-spacing: 2px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-menu { display: flex; gap: 30px; align-items: center; }
+        .nav-link {
+            font-family: var(--font-heading); font-size: 14px; font-weight: 700;
+            text-transform: uppercase; color: var(--text-main); transition: var(--transition);
+        }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color); }
+        .hamburger { display: none; font-size: 24px; cursor: pointer; }
+
+        /* ==========================================================================
+           3. PAGE BANNER
+           ========================================================================== */
+        .page-banner {
+            padding: 140px 8% 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(10,11,16,0.6), var(--bg-dark));
+        }
+        .page-banner h1 {
+            font-family: var(--font-heading);
+            font-size: 42px; font-weight: 900;
+            text-transform: uppercase; margin-bottom: 10px;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-glow);
+        }
+        .page-banner p { color: var(--text-muted); font-size: 15px; max-width: 600px; margin: 0 auto; }
+
+        /* ==========================================================================
+           4. MAIN CONTENT (FAQ & CONTACT)
+           ========================================================================== */
+        .about-container {
+            padding: 20px 8% 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        @media (max-width: 992px) {
+            .about-container { grid-template-columns: 1fr; }
+        }
+
+        .section-sub-title {
+            font-family: var(--font-heading);
+            font-size: 22px; font-weight: 700;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            display: flex; align-items: center; gap: 10px;
+            color: var(--text-main);
+        }
+        .section-sub-title i { color: var(--primary-color); }
+
+        /* FAQ Accordion */
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-header {
+            padding: 18px 20px;
+            font-family: var(--font-heading);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq-header:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-body {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-body {
+            padding: 0 20px 18px 20px;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-header i {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 12px; font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+            font-family: var(--font-body);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .btn-send {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), #ff5500);
+            color: #000;
+            font-family: var(--font-heading);
+            font-size: 15px; font-weight: 900;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--primary-glow);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #050608;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                position: fixed; top: 70px; right: -100%;
+                width: 250px; height: calc(100vh - 70px);
+                background: rgba(10, 11, 16, 0.98);
+                flex-direction: column; padding: 40px 20px; transition: 0.4s;
+            }
+            .nav-menu.active { right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-fire-flame-curved"></i> Free Fire
+        </a>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="index.html" class="nav-link">Bosh Sahifa</a></li>
+            <li><a href="characters.html" class="nav-link">Qahramonlar</a></li>
+            <li><a href="store.html" class="nav-link">Do'kon</a></li>
+            <li><a href="tournaments.html" class="nav-link">Turnirlar</a></li>
+            <li><a href="about.html" class="nav-link active">Biz Haqimizda</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+    </header>
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+        <h1>Biz Haqimizda & Qo'llab-quvvatlash</h1>
+        <p>Savollaringiz bormi? FAQ bo'limidan javob toping yoki qo'llab-quvvatlash xizmati bilan bog'laning.</p>
+    </section>
+
+    <!-- CONTENT -->
+    <div class="about-container">
+        <!-- FAQ Section -->
+        <div>
+            <h2 class="section-sub-title"><i class="fa-circle-question fa-solid"></i> Ko'p Beriladigan Savollar</h2>
+            
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>Olmoslar qancha vaqtda hisobga tushadi?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-body">
+                    To'lov muvaffaqiyatli amalga oshirilgandan so'ng, olmoslar 1-5 daqiqa ichida avtomatik ravishda Free Fire ID hisobingizga kelib tushadi.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>Turnirlarda qanday ishtirok etish mumkin?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-body">
+                    Turnirlar bo'limiga o'tib, o'zingizga maqul bo'lgan musobaqani tanlang va "Ro'yxatdan o'tish" tugmasini bosing. Jamoangiz tarkibini kiritishingiz kifoya.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>O'yin ID raqamini qayerdan topaman?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-body">
+                    Free Fire o'yiniga kiring, yuqori chap burchakdagi profilingiz ustiga bosing. Profilingiz ostida raqamlardan iborat ID joylashgan bo'ladi.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>To'lov amalga oshmadi, nima qilish kerak?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-body">
+                    Agar to'lovda xatolik yuz bersa, to'lov kvitansiyasini saqlab qoling va o'ng tarafdagi aloqa formasi orqali bizga xabar yuboring.
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div>
+            <h2 class="section-sub-title"><i class="fa-envelope fa-solid"></i> Bizga Xabar Qoldiring</h2>
+            <form class="contact-form" onsubmit="handleContact(event)">
+                <div class="form-group">
+                    <label class="form-label">Ismingiz</label>
+                    <input type="text" id="contactName" class="form-input" placeholder="Ismingizni kiriting" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Telegram / Phone</label>
+                    <input type="text" id="contactInfo" class="form-input" placeholder="@username yoki telefon raqam" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Xabar / Muammo</label>
+                    <textarea id="contactMessage" class="form-textarea" placeholder="Xabaringizni batafsil yozing..." required></textarea>
+                </div>
+                <button type="submit" class="btn-send">Xabarni Yuborish</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Free Fire Fan Portal. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                
+                // Boshqa barcha ochiq akkordeonlarni yopish
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    if (i !== item) i.classList.remove('active');
+                });
+
+                item.classList.toggle('active');
+            });
+        });
+
+        // Form Submit
+        function handleContact(event) {
+            event.preventDefault();
+            const name = document.getElementById('contactName').value;
+            alert(`Rahmat, ${name}! Xabaringiz qabul qilindi. Tez orada siz bilan bog'lanamiz.`);
+            event.target.reset();
+        }
+
+        // Mobile Nav
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>

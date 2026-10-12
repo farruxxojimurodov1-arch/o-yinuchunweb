@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire — Qahramonlar va Qobiliyatlar</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. STYLES RESET & VARIABLES
+           ========================================================================== */
+        :root {
+            --primary-color: #ff9d00;
+            --primary-glow: rgba(255, 157, 0, 0.4);
+            --secondary-color: #ff0055;
+            --bg-dark: #0a0b10;
+            --bg-card: rgba(18, 22, 36, 0.85);
+            --bg-card-hover: rgba(28, 35, 56, 0.95);
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+            --border-color: rgba(255, 157, 0, 0.25);
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 10%, rgba(255, 157, 0, 0.08) 0%, transparent 50%);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 11, 16, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 24px; font-weight: 900;
+            color: var(--primary-color);
+            text-transform: uppercase; letter-spacing: 2px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-menu { display: flex; gap: 30px; align-items: center; }
+        .nav-link {
+            font-family: var(--font-heading); font-size: 14px; font-weight: 700;
+            text-transform: uppercase; color: var(--text-main); transition: var(--transition);
+        }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color); }
+        .hamburger { display: none; font-size: 24px; cursor: pointer; }
+
+        /* ==========================================================================
+           3. BANNER SECTION
+           ========================================================================== */
+        .page-banner {
+            padding: 140px 8% 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(10,11,16,0.6), var(--bg-dark));
+        }
+        .page-banner h1 {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #fff, var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-banner p { color: var(--text-muted); font-size: 15px; max-width: 600px; margin: 0 auto; }
+
+        /* ==========================================================================
+           4. FILTER & SEARCH CONTROL
+           ========================================================================== */
+        .controls-section {
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .filter-btns {
+            display: flex;
+            gap: 10px;
+        }
+        .filter-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            font-family: var(--font-heading);
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-color);
+            color: #000;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        /* ==========================================================================
+           5. CHARACTERS GRID
+           ========================================================================== */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 8% 80px;
+        }
+
+        .char-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .char-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(255, 157, 0, 0.2);
+        }
+
+        .char-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background: #151a28;
+        }
+
+        .char-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .char-card:hover .char-img {
+            transform: scale(1.08);
+        }
+
+        .skill-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-family: var(--font-heading);
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .skill-badge.active-skill {
+            background: var(--secondary-color);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+        }
+        .skill-badge.passive-skill {
+            background: var(--primary-color);
+            color: #000;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .char-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .char-name {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .char-role {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: auto;
+        }
+
+        .skill-title {
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ==========================================================================
+           6. FOOTER
+           ========================================================================== */
+        footer {
+            background: #050608;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                position: fixed; top: 70px; right: -100%;
+                width: 250px; height: calc(100vh - 70px);
+                background: rgba(10, 11, 16, 0.98);
+                flex-direction: column; padding: 40px 20px; transition: 0.4s;
+            }
+            .nav-menu.active { right: 0; }
+            .controls-section { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-fire-flame-curved"></i> Free Fire
+        </a>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="index.html" class="nav-link">Bosh Sahifa</a></li>
+            <li><a href="characters.html" class="nav-link active">Qahramonlar</a></li>
+            <li><a href="store.html" class="nav-link">Do'kon</a></li>
+            <li><a href="tournaments.html" class="nav-link">Turnirlar</a></li>
+            <li><a href="about.html" class="nav-link">Biz Haqimizda</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+    </header>
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+        <h1>O'yin Qahramonlari</h1>
+        <p>Jang maydonida g'alaba qozonish uchun o'zingizga mos bo'lgan maxsus qobiliyatli xarakterni tanlang.</p>
+    </section>
+
+    <!-- SEARCH & FILTER CONTROLS -->
+    <div class="controls-section">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Qahramon nomini qidiring...">
+        </div>
+        <div class="filter-btns">
+            <button class="filter-btn active" onclick="filterChars('all')">Barchasi</button>
+            <button class="filter-btn" onclick="filterChars('active')">Active Skill</button>
+            <button class="filter-btn" onclick="filterChars('passive')">Passive Skill</button>
+        </div>
+    </div>
+
+    <!-- CHARACTERS LIST -->
+    <div class="char-grid" id="charGrid">
+        <!-- Qahramonlar JS orqali render qilinadi -->
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Free Fire Fan Portal. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Qahramonlar ma'lumotlar bazasi
+        const characters = [
+            {
+                name: "DJ Alok",
+                type: "active",
+                role: "Support / Speed",
+                image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=600&auto=format&fit=crop",
+                skillName: "Drop the Beat",
+                skillDesc: "5m aura yaratadi, harakat tezligini 15% ga oshiradi va 10 soniya davomida HP tiklaydi."
+            },
+            {
+                name: "Chrono",
+                type: "active",
+                role: "Defense Master",
+                image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
+                skillName: "Time Turner",
+                skillDesc: "800 ta zararni to'sadigan himoya maydoni yaratadi. Maydon ichidagi do'stlarni himoya qiladi."
+            },
+            {
+                name: "Skyler",
+                type: "active",
+                role: "Gloo Wall Breaker",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
+                skillName: "Riptide Rhythm",
+                skillDesc: "100 metr masofadagi 5 ta Gloo Wall-ni yo'q qiluvchi sonik to'lqin chiqaradi."
+            },
+            {
+                name: "Kelly",
+                type: "passive",
+                role: "Sprinter / Rusher",
+                image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop",
+                skillName: "Dash",
+                skillDesc: "Yugurish tezligini doimiy ravishda 6% ga oshiradi. Tezkor harakat uchun juda mos."
+            },
+            {
+                name: "Hayato",
+                type: "passive",
+                role: "Armor Breaker",
+                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop",
+                skillName: "Bushido",
+                skillDesc: "Maksimal HP 10% ga kamayganda, dushman bronasini teshish qobiliyati 10% ga oshadi."
+            },
+            {
+                name: "Moco",
+                type: "passive",
+                role: "Intel / Tracker",
+                image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop",
+                skillName: "Hacker's Eye",
+                skillDesc: "O'q teggan dushmanni 5 soniya davomida xaritada jamoadoshlariga ko'rsatib turadi."
+            }
+        ];
+
+        const charGrid = document.getElementById('charGrid');
+        const searchInput = document.getElementById('searchInput');
+
+        // Cards Render qiluvchi funksiya
+        function renderCharacters(data) {
+            charGrid.innerHTML = '';
+            if (data.length === 0) {
+                charGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Hech qanday qahramon topilmadi.</p>`;
+                return;
+            }
+
+            data.forEach(char => {
+                const card = document.createElement('div');
+                card.className = 'char-card';
+                card.innerHTML = `
+                    <div class="char-img-wrap">
+                        <img src="${char.image}" alt="${char.name}" class="char-img">
+                        <span class="skill-badge ${char.type === 'active' ? 'active-skill' : 'passive-skill'}">
+                            ${char.type}
+                        </span>
+                    </div>
+                    <div class="char-info">
+                        <h3 class="char-name">${char.name}</h3>
+                        <div class="char-role">${char.role}</div>
+                        <div class="skill-box">
+                            <div class="skill-title">
+                                <i class="fa-solid fa-bolt"></i> ${char.skillName}
+                            </div>
+                            <div class="skill-desc">${char.skillDesc}</div>
+                        </div>
+                    </div>
+                `;
+                charGrid.appendChild(card);
+            });
+        }
+
+        // Qidiruv va Filtr
+        let currentFilter = 'all';
+
+        function filterChars(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            applyFilters();
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filtered = characters.filter(char => {
+                const matchesType = (currentFilter === 'all') || (char.type === currentFilter);
+                const matchesSearch = char.name.toLowerCase().includes(searchTerm) || char.skillName.toLowerCase().includes(searchTerm);
+                return matchesType && matchesSearch;
+            });
+            renderCharacters(filtered);
+        }
+
+        // Boshlang'ich yuklash
+        renderCharacters(characters);
+
+        // Mobile Nav
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>
